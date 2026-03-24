@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-pixel: "VT323", monospace;
+  --color-cyan-glitch: #00FFFF;
+  --color-magenta-glitch: #FF00FF;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: var(--font-pixel);
+  overflow: hidden;
+}
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.glitch-text::before {
+  left: 3px;
+  text-shadow: -2px 0 #FF00FF;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -3px;
+  text-shadow: -2px 0 #00FFFF;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(14px, 9999px, 11px, 0); }
+  20% { clip: rect(81px, 9999px, 86px, 0); }
+  40% { clip: rect(19px, 9999px, 63px, 0); }
+  60% { clip: rect(66px, 9999px, 3px, 0); }
+  80% { clip: rect(31px, 9999px, 45px, 0); }
+  100% { clip: rect(96px, 9999px, 90px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(3px, 9999px, 4px, 0); }
+  40% { clip: rect(45px, 9999px, 66px, 0); }
+  60% { clip: rect(89px, 9999px, 12px, 0); }
+  80% { clip: rect(11px, 9999px, 88px, 0); }
+  100% { clip: rect(55px, 9999px, 22px, 0); }
+}
+
+.scanlines {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.3));
+  background-size: 100% 4px;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.static-noise {
+  position: absolute;
+  top: -50%; left: -50%; right: -50%; bottom: -50%;
+  width: 200%; height: 200%;
+  background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat 0 0;
+  animation: bg-animation .2s infinite;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 40;
+}
+
+@keyframes bg-animation {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-1%,-1%) }
+    20% { transform: translate(-2%,1%) }
+    30% { transform: translate(1%,-2%) }
+    40% { transform: translate(-1%,3%) }
+    50% { transform: translate(-2%,1%) }
+    60% { transform: translate(3%,0) }
+    70% { transform: translate(0,3%) }
+    80% { transform: translate(1%,7%) }
+    90% { transform: translate(-2%,2%) }
+}
+
+.glitch-border {
+  border: 2px solid #00FFFF;
+  box-shadow: 4px 4px 0px #FF00FF, -2px -2px 0px #00FFFF;
+  transition: all 0.1s ease;
+}
+
+.glitch-border:hover {
+  border-color: #FF00FF;
+  box-shadow: 4px 4px 0px #00FFFF, -2px -2px 0px #FF00FF;
+}
+
+.glitch-btn {
+  background: #000;
+  color: #00FFFF;
+  border: 2px solid #00FFFF;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.1s ease;
+}
+.glitch-btn:hover {
+  background: #00FFFF;
+  color: #000;
+  box-shadow: 4px 4px 0px #FF00FF;
+  transform: translate(-2px, -2px);
+}
+.glitch-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
